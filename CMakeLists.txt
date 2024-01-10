@@ -64,13 +64,6 @@ install(TARGETS ${component_name}
   RUNTIME DESTINATION bin
 )
 
-################################################################################
-# install shared resources
-################################################################################
-install(
-  DIRECTORY launch config
-  DESTINATION share/${PROJECT_NAME}
-)
 
 ament_package()
 
