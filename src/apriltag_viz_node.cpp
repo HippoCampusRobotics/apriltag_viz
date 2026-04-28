@@ -87,7 +87,7 @@ void ApriltagVizNode::OnDetections(
   }
 
   overlay_ = cv::Mat(input_image_.size(), CV_8UC3, cv::Scalar(0, 0, 0, 0));
-  for (const auto &detection : _msg->detections) {
+  for (const auto& detection : _msg->detections) {
     const std::array<double, 2> center =
         ProjectOntoImage(detection.homography, {0.0, 0.0});
     const std::array<double, 2> p0 =
@@ -95,9 +95,11 @@ void ApriltagVizNode::OnDetections(
     const std::array<double, 2> p1 =
         ProjectOntoImage(detection.homography, {0.0, 1.0});
     cv::line(overlay_, cv::Point2d(center.at(0), center.at(1)),
-             cv::Point2d(p0.at(0), p0.at(1)), cv::Scalar(255, 0, 0, 255), 3);
+             cv::Point2d(p0.at(0), p0.at(1)), cv::Scalar(255, 0, 0, 255),
+             params_.line_thickness);
     cv::line(overlay_, cv::Point2d(center.at(0), center.at(1)),
-             cv::Point2d(p1.at(0), p1.at(1)), cv::Scalar(0, 255, 0, 255), 3);
+             cv::Point2d(p1.at(0), p1.at(1)), cv::Scalar(0, 255, 0, 255),
+             params_.line_thickness);
     for (int i = 0; i < 4; ++i) {
       cv::circle(
           overlay_,
